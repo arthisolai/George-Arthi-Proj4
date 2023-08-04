@@ -10,6 +10,8 @@ function App() {
     defaultValue: [],
   });
 
+  const isGoodWeather = true;
+
   function handleAddActivity(activity) {
     console.log(activity);
     const newActivity = { id: uid(), ...activity };
@@ -18,8 +20,7 @@ function App() {
 
   return (
     <>
-      <List activities={activities} />
-
+      <List activities={activities} isGoodWeather={isGoodWeather} />
       <Form onAddActivity={handleAddActivity} />
     </>
   );

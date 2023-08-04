@@ -15,14 +15,14 @@ export function Form({ onAddActivity }) {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Add New Activity</h1>
-      <label>
-        Name :
+      <div>
+        <label>Name :</label>
         <input type="text" name="activityName" required />
-      </label>
-      <label>
-        Good-Weather Activity:
+      </div>
+      <div>
         <input type="checkbox" name="weatherCheckbox" />
-      </label>
+        <label>Good-Weather Activity:</label>
+      </div>
       <button type="submit">Submit</button>
     </form>
   );
