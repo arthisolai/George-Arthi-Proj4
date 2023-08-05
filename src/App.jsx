@@ -4,39 +4,15 @@ import { Form } from "./Form/Form.jsx";
 import { uid } from "uid";
 import { useState, useEffect } from "react";
 import { List } from "./List/List";
+import { WeatherFetch } from "./Fetch/Fetch";
 
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [],
   });
   const [weather, setWeather] = useState({});
-  // const isGoodWeather = true;
-
-  useEffect(() => {
-    async function fetchWeather() {
-      try {
-        const response = await fetch(
-          "https://example-apis.vercel.app/api/weather"
-        );
-        const data = await response.json();
-
-        setWeather(data);
-      } catch (error) {
-        console.error("Error fetching the weather data", error);
-      }
-    }
-
-    fetchWeather();
-
-    const intervalId = setInterval(fetchWeather, 5000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  console.log(weather);
 
   function handleAddActivity(activity) {
-    console.log(activity);
     const newActivity = { id: uid(), ...activity };
     setActivities([...activities, newActivity]);
   }
@@ -47,6 +23,7 @@ function App() {
 
   return (
     <>
+      <WeatherFetch setWeather={setWeather} />
       {weather ? (
         <h1>
           {weather.condition} {weather.temperature}°C

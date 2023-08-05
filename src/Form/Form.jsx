@@ -6,7 +6,6 @@ export function Form({ onAddActivity }) {
     const name = form.elements.activityName.value;
     const isForGoodWeather = form.elements.weatherCheckbox.checked;
 
-    // console.log("name" = name,  "isForGoodWeather" = isForGoodWeather);
     onAddActivity({ name: name, isForGoodWeather: isForGoodWeather });
     form.reset();
     form.elements.activityName.focus();
@@ -20,8 +19,8 @@ export function Form({ onAddActivity }) {
         <input type="text" name="activityName" required />
       </div>
       <div>
-        <input type="checkbox" name="weatherCheckbox" />
         <label>Good-Weather Activity:</label>
+        <input type="checkbox" name="weatherCheckbox" />
       </div>
       <button type="submit">Submit</button>
     </form>
