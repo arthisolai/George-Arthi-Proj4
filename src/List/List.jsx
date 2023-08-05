@@ -1,4 +1,4 @@
-export function List({ activities, isGoodWeather }) {
+export function List({ activities, isGoodWeather, onDeleteActivity }) {
   const filteredActivities = activities.filter((activity) => {
     return activity.isForGoodWeather === isGoodWeather;
   });
@@ -13,7 +13,10 @@ export function List({ activities, isGoodWeather }) {
 
       <ul>
         {filteredActivities.map((activity) => (
-          <li key={activity.id}>{activity.name}</li>
+          <li key={activity.id}>
+            {activity.name}
+            <button onClick={() => onDeleteActivity(activity.id)}>╳</button>
+          </li>
         ))}
       </ul>
     </div>

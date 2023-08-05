@@ -12,21 +12,25 @@ function App() {
   const [weather, setWeather] = useState({});
   // const isGoodWeather = true;
 
-  async function fetchWeather() {
-    try {
-      const response = await fetch(
-        "https://example-apis.vercel.app/api/weather"
-      );
-      const data = await response.json();
-
-      setWeather(data);
-    } catch (error) {
-      console.error("Error fetching the weather data:", error);
-    }
-  }
-
   useEffect(() => {
+    async function fetchWeather() {
+      try {
+        const response = await fetch(
+          "https://example-apis.vercel.app/api/weather"
+        );
+        const data = await response.json();
+
+        setWeather(data);
+      } catch (error) {
+        console.error("Error fetching the weather data", error);
+      }
+    }
+
     fetchWeather();
+
+    const intervalId = setInterval(fetchWeather, 5000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   console.log(weather);
@@ -37,16 +41,24 @@ function App() {
     setActivities([...activities, newActivity]);
   }
 
+  function handleDeleteActivity(id) {
+    setActivities(activities.filter((activity) => activity.id !== id));
+  }
+
   return (
     <>
       {weather ? (
-        <h2>
+        <h1>
           {weather.condition} {weather.temperature}°C
-        </h2>
+        </h1>
       ) : (
         <h2>Loading Weather...</h2>
       )}
-      <List activities={activities} isGoodWeather={weather.isGoodWeather} />
+      <List
+        activities={activities}
+        isGoodWeather={weather.isGoodWeather}
+        onDeleteActivity={handleDeleteActivity}
+      />
       <Form onAddActivity={handleAddActivity} />
     </>
   );
