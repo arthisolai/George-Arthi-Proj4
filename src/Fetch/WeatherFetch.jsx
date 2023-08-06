@@ -1,6 +1,7 @@
+import "./WeatherFetch.css";
 import { useState, useEffect } from "react";
 
-export function WeatherFetch({ setWeather }) {
+export function WeatherFetch({ weather, setWeather }) {
   useEffect(() => {
     async function fetchWeather() {
       try {
@@ -25,5 +26,15 @@ export function WeatherFetch({ setWeather }) {
     return () => clearInterval(intervalId);
   }, [setWeather]);
 
-  return null;
+  return (
+    <section className="weather-section">
+      {weather ? (
+        <h1 className="weather-section__heading">
+          {weather.condition} {weather.temperature}°C
+        </h1>
+      ) : (
+        <h2>Loading Weather...</h2>
+      )}
+    </section>
+  );
 }

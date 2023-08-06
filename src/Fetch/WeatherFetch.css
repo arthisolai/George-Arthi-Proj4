@@ -1,0 +1,13 @@
+.weather-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.weather-section__heading {
+  font-size: 50px;
+  margin: 10px;
+}

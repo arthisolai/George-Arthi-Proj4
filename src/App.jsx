@@ -4,7 +4,7 @@ import { Form } from "./Form/Form.jsx";
 import { uid } from "uid";
 import { useState, useEffect } from "react";
 import { List } from "./List/List";
-import { WeatherFetch } from "./Fetch/Fetch";
+import { WeatherFetch } from "./Fetch/WeatherFetch";
 
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
@@ -22,22 +22,15 @@ function App() {
   }
 
   return (
-    <>
-      <WeatherFetch setWeather={setWeather} />
-      {weather ? (
-        <h1>
-          {weather.condition} {weather.temperature}°C
-        </h1>
-      ) : (
-        <h2>Loading Weather...</h2>
-      )}
+    <section>
+      <WeatherFetch weather={weather} setWeather={setWeather} />
       <List
         activities={activities}
         isGoodWeather={weather.isGoodWeather}
         onDeleteActivity={handleDeleteActivity}
       />
       <Form onAddActivity={handleAddActivity} />
-    </>
+    </section>
   );
 }
 export default App;
