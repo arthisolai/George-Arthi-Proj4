@@ -1,6 +1,6 @@
 import "./Form.css";
 
-export function Form({ onAddActivity }) {
+export function Form({ onAddActivity, activities }) {
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -8,9 +8,21 @@ export function Form({ onAddActivity }) {
     const name = form.elements.activityName.value;
     const isForGoodWeather = form.elements.weatherCheckbox.checked;
 
-    onAddActivity({ name: name, isForGoodWeather: isForGoodWeather });
-    form.reset();
-    form.elements.activityName.focus();
+    const isActivityPresent = activities.some(
+      (activity) =>
+        activity.name.toLowerCase() === name.toLowerCase() &&
+        activity.isForGoodWeather === isForGoodWeather
+    );
+
+    if (!isActivityPresent) {
+      onAddActivity({ name: name, isForGoodWeather: isForGoodWeather });
+      form.reset();
+      form.elements.activityName.focus();
+    } else {
+      const messageElement = document.getElementById("activity-message");
+      messageElement.innerText = "Activity already available!";
+      setTimeout(() => (messageElement.innerText = ""), 3000);
+    }
   }
 
   return (
@@ -37,6 +49,7 @@ export function Form({ onAddActivity }) {
       <button className="activity-form__add-button" type="submit">
         Add
       </button>
+      <p className="error-message" id="activity-message"></p>
     </form>
   );
 }
