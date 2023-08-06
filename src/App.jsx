@@ -29,7 +29,7 @@ function App() {
         isGoodWeather={weather.isGoodWeather}
         onDeleteActivity={handleDeleteActivity}
       />
-      <Form onAddActivity={handleAddActivity} />
+      <Form onAddActivity={handleAddActivity} activities={activities} />
     </section>
   );
 }

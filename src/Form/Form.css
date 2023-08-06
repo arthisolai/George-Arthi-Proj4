@@ -9,6 +9,7 @@
 .activity-form__heading {
   font-size: 30px;
   margin-bottom: 20px;
+  color: wheat;
 }
 
 .activity-form__activity-name {
@@ -26,6 +27,7 @@
   margin: 10px 0;
   font-size: 20px;
   font-weight: bold;
+  color: wheat;
 }
 
 .activity-form__add-button {
@@ -44,4 +46,9 @@
 .activity-form__add-button:hover {
   background-color: #45a049;
   color: white;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
 }
