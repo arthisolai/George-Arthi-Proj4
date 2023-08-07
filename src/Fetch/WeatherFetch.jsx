@@ -8,14 +8,15 @@ export function WeatherFetch({ weather, setWeather }) {
         const response = await fetch(
           "https://example-apis.vercel.app/api/weather"
         );
-        if (!response.ok) {
-          setWeather("Loading...");
-        }
+        // if (!response.ok) {
+        //   setWeather("Loading...");
+        // }
         const data = await response.json();
 
         setWeather(data);
       } catch (error) {
         console.error("Error fetching the weather data", error);
+        setWeather(null);
       }
     }
 
@@ -24,16 +25,20 @@ export function WeatherFetch({ weather, setWeather }) {
     const intervalId = setInterval(fetchWeather, 5000);
 
     return () => clearInterval(intervalId);
-  }, [setWeather]);
+  }, []);
+
+  useEffect(() => {
+    console.log("weather in wather fetch", weather);
+  }, [weather]);
 
   return (
     <section className="weather-section">
-      {weather ? (
+      {weather.temperature ? (
         <h1 className="weather-section__heading">
           {weather.condition} {weather.temperature}°C
         </h1>
       ) : (
-        <h2>Loading Weather...</h2>
+        <h2 className="weather-section__heading">Loading Weather...</h2>
       )}
     </section>
   );
