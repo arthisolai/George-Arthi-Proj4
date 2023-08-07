@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <section>
+    <section className="section-container">
       <WeatherFetch weather={weather} setWeather={setWeather} />
       <List
         activities={activities}
