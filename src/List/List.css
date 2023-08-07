@@ -1,5 +1,7 @@
 .list-item {
   padding: 70px;
+  overflow: auto;
+  margin-bottom: 120px;
 }
 
 .list-item h2 {
