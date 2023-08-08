@@ -16,7 +16,7 @@ export function WeatherFetch({ weather, setWeather }) {
         setWeather(data);
       } catch (error) {
         console.error("Error fetching the weather data", error);
-        setWeather(null);
+        setWeather({});
       }
     }
 
